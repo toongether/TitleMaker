@@ -9,7 +9,16 @@
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>consoleApp</name>
+    <name>TitleMaker</name>
+    <description>Easy Text-to-SVG tool for any Comic Thumbnails</description>
+    <url>https://github.com/toongether/TitleMaker</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

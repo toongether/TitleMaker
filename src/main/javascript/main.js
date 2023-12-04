@@ -5,7 +5,6 @@ function main(title, fontPath, alignLeft) {
         print(err);
         return '';
     }
-
     var wrapText = function(text, width) {
         var regexString = '.{1,' + width + '}';
         var re = new RegExp(regexString, 'g');
@@ -37,12 +36,12 @@ function main(title, fontPath, alignLeft) {
             var path = font.getPath(item, xPos(), 100 * (index + 1), 100);
             return path.toSVG();
         })
-        .join("");
+        .join('');
 
     return [
         '<?xml version="1.0"?><svg',
         'xmlns="http://www.w3.org/2000/svg"',
         'xmlns:xlink="http://www.w3.org/1999/xlink"',
         'fill="white" width="' + maxWidth + '" height="' + textArray.length * 110 + '"><g>' + result + '</g></svg>'
-    ].join(" ");
+    ].join(' ');
 }
