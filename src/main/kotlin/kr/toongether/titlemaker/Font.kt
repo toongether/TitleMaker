@@ -1,5 +1,10 @@
 package kr.toongether.titlemaker
 
+/**
+ * Font Class
+ *
+ * @property fileName name of the font file.
+ */
 enum class Font(val fileName: String) {
     CAFE24CLASSIC("Cafe24Classic.otf"),
     CAFE24DANJUNGHAE("Cafe24Danjunghae.otf"),
