@@ -7,8 +7,18 @@ TitleMaker is easy Text-to-SVG tool for any Comic Thumbnails.
 <dependency>
     <groupId>kr.toongether.titlemaker</groupId>
     <artifactId>titlemaker</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
+```
+### via Gradle
+```kts
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("kr.toongether.titlemaker:titlemaker:0.0.2")
+}
 ```
 
 ## Usage
