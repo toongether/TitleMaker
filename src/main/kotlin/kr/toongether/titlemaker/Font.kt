@@ -1,7 +1,7 @@
 package kr.toongether.titlemaker
 
 /**
- * Font Class
+ * Font Enum Class
  *
  * @property fileName name of the font file.
  */

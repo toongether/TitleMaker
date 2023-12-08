@@ -1,6 +1,6 @@
-function main(title, fontPath, alignLeft) {
+function main(title, alignLeft) {
     try {
-        var font = opentype.loadSync(fontPath);
+        var font = opentype.loadSync(fontByteArray);
     } catch (err) {
         print(err);
         return '';

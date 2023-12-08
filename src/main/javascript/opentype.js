@@ -14232,18 +14232,14 @@
     /**
      * Synchronously load the font from a URL or file.
      * When done, returns the font object or throws an error.
+     * modified for nashorn too.
      * @alias opentype.loadSync
-     * @param  {string} url - The URL of the font to load.
+     * @byte  {byte} file
      * @param  {Object} opt - opt.lowMemory
      * @return {opentype.Font}
      */
-    function loadSync(url, opt) {
-        var Paths = java.nio.file.Paths;
-        var Files = java.nio.file.Files;
-
-        var pathObj = Paths.get(url);
-        var bytes = Files.readAllBytes(pathObj);
-        var javaByteBuffer = java.nio.ByteBuffer.wrap(bytes);
+    function loadSync(byte, opt) {
+        var javaByteBuffer = java.nio.ByteBuffer.wrap(byte);
         var javaByteArray = javaByteBuffer.array();
 
         return parseBuffer(nodeBufferToArrayBuffer(javaByteArray), opt);

@@ -1,9 +1,6 @@
 package kr.toongether.titlemaker
 
 import javax.script.ScriptEngineManager
-import java.nio.file.Files
-import java.nio.file.Paths
-import javax.script.ScriptEngine
 
 /**
  * TitleMaker Class
@@ -13,28 +10,44 @@ import javax.script.ScriptEngine
  */
 class TitleMaker(private val title: String, private val font: Font) {
     private val scriptEngineManager = ScriptEngineManager()
-    private val scriptEngine: ScriptEngine = scriptEngineManager.getEngineByName("nashorn")
+    private val scriptEngine = scriptEngineManager.getEngineByName("nashorn")
+
+    init {
+        scriptEngine.put("fontByteArray", getByteArray(font.fileName))
+        executeScript("opentype.js")
+        executeScript("main.js")
+    }
 
     /**
-     * Executes Javascript
+     * Returns ByteArray of File
+     *
+     * @param resourceName name of the resource.
+     * @return bytearray of the resource
+     */
+    private fun getByteArray(resourceName: String): ByteArray {
+        val classLoader = object {}.javaClass.classLoader
+        val stream = classLoader.getResourceAsStream(resourceName)
+        return stream?.readBytes() ?: ByteArray(0)
+    }
+
+    /**
+     * Executes JavaScript
+     *
      * @param scriptName name of the script.
      */
     private fun executeScript(scriptName: String) {
-        val scriptPath = Paths.get("src", "main", "javascript", scriptName)
-        val scriptContent = String(Files.readAllBytes(scriptPath))
+        val scriptContent = String(getByteArray(scriptName))
         scriptEngine.eval(scriptContent)
     }
 
     /**
      * Makes Title
+     *
      * @param alignLeft aligns title to Left.
      * @return title SVG string.
      */
     fun make(alignLeft: Boolean): String {
-        executeScript("opentype.js")
-        executeScript("main.js")
-        val fontPath = Paths.get("src", "main", "fonts", font.fileName)
-        val script = "main('$title', '$fontPath', $alignLeft);"
+        val script = "main('$title', $alignLeft);"
         return scriptEngine.eval(script) as String
     }
 }
