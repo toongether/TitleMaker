@@ -1,4 +1,4 @@
-function main(title, alignLeft) {
+function main(title, alignLeft, wrap) {
     try {
         var font = opentype.loadSync(fontByteArray);
     } catch (err) {
@@ -19,7 +19,7 @@ function main(title, alignLeft) {
         else return wrappedText;
     };
 
-    var textArray = wrapText(title, 6);
+    var textArray = wrap ? wrapText(title, 6) : [title];
     var maxWidth = font.getAdvanceWidth(
         textArray.reduce(function (a, b) {
             return a.length <= b.length ? b : a;

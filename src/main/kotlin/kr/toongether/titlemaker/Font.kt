@@ -21,8 +21,8 @@ enum class Font(val fileName: String, val fontName: String) {
      *
      * @return font SVG string.
      */
-    val svg: () -> String = {
+    fun getSVG(): String {
         val titleMaker = TitleMaker(this.fontName, this)
-        titleMaker.make(false)
+        return titleMaker.make(false, wrap = false)
     }
 }

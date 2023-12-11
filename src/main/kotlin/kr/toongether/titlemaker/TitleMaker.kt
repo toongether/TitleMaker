@@ -44,10 +44,11 @@ class TitleMaker(private val title: String, private val font: Font) {
      * Makes Title
      *
      * @param alignLeft aligns title to Left.
+     * @param wrap wraps the title.
      * @return title SVG string.
      */
-    fun make(alignLeft: Boolean): String {
-        val script = "main('$title', $alignLeft);"
+    fun make(alignLeft: Boolean, wrap: Boolean = true): String {
+        val script = "main('$title', $alignLeft, $wrap);"
         return scriptEngine.eval(script) as String
     }
 }
