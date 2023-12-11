@@ -5,11 +5,13 @@ function main(title, alignLeft, wrap) {
         print(err);
         return '';
     }
+
     var wrapText = function(text, width) {
         var regexString = '.{1,' + width + '}';
+        regexString += '([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)';
         var re = new RegExp(regexString, 'g');
         var lines = text.match(re) || [];
-        var wrappedText = lines.map(function (line) {
+        var wrappedText = lines.map(function(line) {
             if (line.slice(-1) === '\n') {
                 line = line.slice(0, line.length - 1);
             }
@@ -20,12 +22,10 @@ function main(title, alignLeft, wrap) {
     };
 
     var textArray = wrap ? wrapText(title, 6) : [title];
-    var maxWidth = font.getAdvanceWidth(
-        textArray.reduce(function (a, b) {
-            return a.length <= b.length ? b : a;
-        }),
-        100
-    );
+    var sizeArray = textArray.map(function(text) {
+        return font.getAdvanceWidth(text, 100);
+    });
+    var maxWidth = Math.max.apply(null, sizeArray);
 
     var result = textArray
         .map(function (item, index) {
